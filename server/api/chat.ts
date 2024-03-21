@@ -7,6 +7,7 @@ export default defineLazyEventHandler(async () => {
   if (!apiKey) throw new Error('Missing OpenAI API key');
   const openai = new OpenAI({
     apiKey: apiKey,
+    baseURL: 'https://api.groq.com/openai/v1',
   });
 
   return defineEventHandler(async (event: any) => {
@@ -17,7 +18,7 @@ export default defineLazyEventHandler(async () => {
 
     // Ask OpenAI for a streaming chat completion given the prompt
     const response = await openai.chat.completions.create({
-      model: 'gpt-3.5-turbo',
+      model: 'mixtral-8x7b-32768',
       stream: true,
       messages,
     });
